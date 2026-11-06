@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Race the Clock — Seven Bosses",
+  "short_name": "Race the Clock",
+  "description": "Survive the clock, beat the seven bosses.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#0b0c1a",
+  "theme_color": "#0b0c1a",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["games"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
