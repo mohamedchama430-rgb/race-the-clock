@@ -1,4 +1,4 @@
-* Race the Clock — leaderboard settings.
+/* Race the Clock — leaderboard settings.
    After running leaderboard.sql in Supabase, paste your two values here:
    Supabase -> Project Settings -> API:  "Project URL"  and  "anon / publishable key".
    Leave both empty ('') to switch the leaderboard OFF. */
