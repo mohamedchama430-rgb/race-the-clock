@@ -65,6 +65,10 @@ self.addEventListener('fetch', e => {
     e.waitUntil(checkForUpdate());
     return;
   }
+  if (url.origin === location.origin && url.pathname.endsWith('/lb-config.js')) {
+    e.respondWith(fetch(req).then(r => { if (r.ok) { const c = r.clone(); caches.open(SHELL_CACHE).then(x => x.put(req, c)); } return r; }).catch(() => caches.match(req)));
+    return;
+  }
   if (url.origin === location.origin) {
     e.respondWith(caches.match(req).then(r => r || fetch(req)));
     return;
