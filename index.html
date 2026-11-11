@@ -299,6 +299,12 @@ html[lang=ar] #rtcSettings label b{float:left}
 html[lang=ar] .logo h1{line-height:1.2}
 html[lang=ar] .acBtn,html[lang=ar] .acBig{text-align:right}
 html[lang=ar] .keyboardHint,html[lang=ar] .stepper,html[lang=ar] #rtcSettings [data-k=language]{direction:ltr}
+
+#menu{overflow:hidden!important;overscroll-behavior:none;padding:0!important}
+#menu .menuContent{position:absolute!important;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;width:calc(100% - 32px);max-width:620px;transform-origin:center center;gap:0}
+#menu .menuContent>*{flex-shrink:0}
+#menu .logo{margin-top:0}
+@media(max-height:600px){#menu .arcadeBrand,#menu .tag{display:none}#menu .logo h1{font-size:clamp(30px,9vh,58px)}#menu .arcadePanel{padding:14px}}
 </style>
 <script src="lb-config.js"></script>
 <script id="pwaInstall">
@@ -744,7 +750,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <div class="btns"><button id="cont" class="btn alt" type="button" style="display:none">CONTINUE</button><button id="go" class="btn" type="button">LET'S PLAY</button><button id="guideBtn" class="btn alt guide" type="button">◈ Field Guide</button><button id="stageBtn" class="btn alt" type="button">⚑ Choose Stage</button><button id="setBtn" class="btn alt" type="button">⚙ Settings</button></div>
 <div class="note" id="newNote" style="display:none"></div>
 </div>
-<div class="ctrl"><span class="keyboardHint"><kbd>W A S D</kbd> / <kbd>↑ ← ↓ →</kbd> MOVE &nbsp; <kbd>P</kbd> PAUSE &nbsp; <kbd>M</kbd> SOUND</span><span class="touchHint">DRAG TO MOVE · DODGE TO SURVIVE</span><div class="footerLives">♥ ♥ ♥ <span>THREE HEARTS. EVERY SECOND COUNTS.</span></div></div>
+
 </div>
 
 <div id="guide" class="ov">
@@ -2571,29 +2577,20 @@ function drawClone(e){
 }
 // All ornaments are cosmetic: collision radii and attack cues remain unchanged.
 function drawFacetedCore(x,y,r,t,color,light,elite){
- ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);
- ctx.fillStyle='#250f23';ctx.fillRect(-r*.76,-r*.76,r*1.52,r*1.52);
- ctx.strokeStyle=elite?'#ffe6a0':light;ctx.lineWidth=Math.max(1,r*.11);ctx.strokeRect(-r*.76,-r*.76,r*1.52,r*1.52);
- const colors=[light,color,'#571e40',color];
- for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*TAU/4);ctx.fillStyle=colors[i];ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-r*.57,-r*.57);ctx.lineTo(r*.57,-r*.57);ctx.closePath();ctx.fill();ctx.restore();}
- ctx.strokeStyle=elite?'#fff2be':'#ffc5d7';ctx.lineWidth=Math.max(1,r*.07);ctx.beginPath();ctx.moveTo(-r*.46,-r*.46);ctx.lineTo(r*.46,r*.46);ctx.moveTo(r*.46,-r*.46);ctx.lineTo(-r*.46,r*.46);ctx.stroke();
- if(elite){for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*TAU/4);ctx.fillStyle='#ffdb83';ctx.fillRect(-r*.17,-r*1.03,r*.34,r*.13);ctx.restore();}}
- ctx.restore();
+ ctx.save();ctx.translate(x,y);disc(0,0,r,light,DARK[elite?'z':'c']);
+ ctx.strokeStyle=elite?'#ffc891':'#9f344c';ctx.lineWidth=Math.max(1,r*.12);ctx.lineCap='round';
+ for(let i=0;i<3;i++){ctx.beginPath();A(0,0,r*(.35+i*.2),.5+i*.7,2.1+i*.7);ctx.stroke();}ctx.restore();
 }
 function drawPhantomSeal(x,y,r,royal,t){
- ctx.save();ctx.translate(x,y);ctx.lineJoin='round';
- ctx.fillStyle=lin(0,-r*.72,0,r*.62,'#3a305a','#110e29');
- ctx.beginPath();ctx.moveTo(0,-r*.75);ctx.lineTo(r*.62,-r*.36);ctx.lineTo(r*.48,r*.35);ctx.lineTo(0,r*.65);ctx.lineTo(-r*.48,r*.35);ctx.lineTo(-r*.62,-r*.36);ctx.closePath();ctx.fill();
- ctx.strokeStyle=royal?'#ffe0a2':'#d9ceff';ctx.lineWidth=Math.max(1,r*.07);ctx.stroke();
- // One continuous sigil, with no eye sockets or pupils.
- ctx.strokeStyle=royal?'#ffda7c':'#c6b5ff';ctx.lineWidth=Math.max(1.2,r*.09);ctx.beginPath();ctx.moveTo(0,-r*.48);ctx.lineTo(-r*.2,-r*.12);ctx.lineTo(r*.18,r*.12);ctx.lineTo(0,r*.43);ctx.moveTo(0,-r*.48);ctx.lineTo(0,r*.43);ctx.stroke();
- ctx.restore();
+ // Soft fabric folds: no face, symbol, sockets or central badge.
+ ctx.save();ctx.translate(x,y);ctx.strokeStyle=royal?'#b3a3df':'#b6ace1';ctx.lineWidth=Math.max(1,r*.07);ctx.lineCap='round';
+ for(const side of [-1,1]){ctx.beginPath();ctx.moveTo(side*r*.58,-r*.3);ctx.quadraticCurveTo(side*r*.3,r*.15,side*r*.48,r*.6);ctx.stroke();}ctx.restore();
 }
 function drawGuardianSeal(x,y,r,t,elite){
- ctx.save();ctx.translate(x,y);ctx.rotate(t*.18);
- ctx.fillStyle=lin(-r,-r,r,r,'#65356f','#170e2a');ctx.beginPath();hexPath(0,0,r);ctx.fill();ctx.strokeStyle=elite?'#ffe4a1':'#ffd2f5';ctx.lineWidth=Math.max(1.5,r*.09);ctx.stroke();
- for(let i=0;i<3;i++){ctx.save();ctx.rotate(i*TAU/3);ctx.fillStyle=elite?'#e6bd74':'#bf79d1';ctx.beginPath();ctx.moveTo(0,-r*.75);ctx.lineTo(r*.19,-r*.14);ctx.lineTo(0,r*.05);ctx.lineTo(-r*.19,-r*.14);ctx.closePath();ctx.fill();ctx.restore();}
- ctx.strokeStyle='#ffecff';ctx.lineWidth=Math.max(1,r*.06);ctx.beginPath();hexPath(0,0,r*.28);ctx.stroke();ctx.restore();
+ ctx.save();ctx.translate(x,y);disc(0,0,r,'#aa77bb','#362345');
+ ctx.strokeStyle=elite?'#e2c7a1':'#d7acdf';ctx.lineWidth=Math.max(1,r*.08);
+ for(let i=0;i<3;i++){ctx.beginPath();A(0,0,r*.74,i*TAU/3+.15,i*TAU/3+1.6);ctx.stroke();}
+ ctx.restore();
 }
 function drawChronosDial(e,r,hands,t){
  const phase=S.p3?3:S.p2?2:1,metal=phase===3?'#ffd2a0':'#f5d187';
@@ -4204,10 +4201,9 @@ drawEnemy=function(e){
  if(e.k==='k'){
   // Chronos dial, bearings and hands are rendered together in drawChronosDial.
  }else if(e.k==='j'){
-  // Heavy beveled armor, cooling vents, and a three-stage furnace.
-  for(let side of [-1,1]){ctx.save();ctx.scale(side,1);ctx.fillStyle=lin(r*.35,-r,r,-r*.3,'#cba789','#43302b');ctx.beginPath();ctx.moveTo(r*.32,-r*.62);ctx.lineTo(r*.73,-r*.99);ctx.lineTo(r*1.02,-r*.56);ctx.lineTo(r*.74,-r*.23);ctx.closePath();ctx.fill();ctx.strokeStyle='#e8b29488';ctx.lineWidth=1.5*U;ctx.stroke();
-   for(let i=0;i<3;i++){ctx.strokeStyle=phase===3?'#ffeb9b':'#ec8d4d';ctx.lineWidth=2*U;ctx.beginPath();ctx.moveTo(r*(.5+i*.11),-r*.64);ctx.lineTo(r*(.61+i*.11),-r*.45);ctx.stroke();}ctx.restore();}
-  for(let i=0;i<3;i++)disc((i-1)*r*.23,r*.58,r*.075,i<phase?'#fff2b0':'#583129',i<phase?'#ff7742':'#251a18');
+  // Inset cooling grooves follow the original armor rather than adding shoulder spikes.
+  ctx.strokeStyle=phase===3?'#ffbe75':'#9b7562';ctx.lineWidth=2*U;
+  for(let i=0;i<4;i++){ctx.beginPath();A(0,0,r*.86,i*TAU/4+.1,i*TAU/4+.8);ctx.stroke();}
  }else if(e.k==='x'){
   // Rotating segmented prism armor, keeping the geometric seal and weapon ring visible.
   for(let i=0;i<6;i++){ctx.save();ctx.rotate(i/6*TAU+t*.15);ctx.fillStyle=lin(r*.83,0,r*1.18,0,'#e6b6ed','#582d64');ctx.beginPath();ctx.moveTo(r*.88,-r*.16);ctx.lineTo(r*1.14,-r*.10);ctx.lineTo(r*1.20,r*.12);ctx.lineTo(r*.89,r*.20);ctx.closePath();ctx.fill();ctx.strokeStyle='#ffe1ff99';ctx.lineWidth=1;ctx.stroke();ctx.restore();}
@@ -4718,40 +4714,16 @@ deluxeFloor=function(){if(bgIdx<5)return oldDeluxeFloor();const key='extra:'+bgI
 const oldDemoCaption=demoCaption;
 demoCaption=function(D){if(D.en.kind==='boss'){const e=D.main,phase=S.p3?3:S.p2?2:1;if(e&&e.p3Warn)return 'PHASE 3: '+BOSS_FINAL[e.k]+' — move to the gap!';return 'PHASE '+phase+' · '+Math.ceil(S.left)+'s left · '+bossLessons[D.en.id][phase-1][0];}return oldDemoCaption(D);};
 
-/* Phase evolution: distinct silhouettes for all seven bosses and repeat tiers. */
+/* Phase evolution through curved seams, surface wear and heat, without arrow ornaments. */
 const beforePhaseEvolution=drawEnemy;
 drawEnemy=function(e){
  beforePhaseEvolution(e);if(!isBoss(e)||e.dead||e.warm>0)return;
- const phase=S.p3?3:S.p2?2:1,r=er(e),t=S.t,elite=e.tier>0;
- ctx.save();ctx.translate(e.x,e.y);ctx.lineJoin='round';ctx.lineWidth=1.4*U;
- const pale={k:'#ffe8b7',j:'#ffd0a1',x:'#f7ceff',q:'#ddffa6',v:'#e9c9ff',C:'#c4f6ff',E:'#ffdda8'}[e.k];
- const plate=(a,reach,width,color)=>{ctx.save();ctx.rotate(a);ctx.fillStyle=lin(r*.8,0,r*reach,0,color,DARK[e.k]);ctx.strokeStyle=pale;ctx.beginPath();ctx.moveTo(r*.86,-r*width);ctx.lineTo(r*reach,-r*width*.3);ctx.lineTo(r*(reach+.08),0);ctx.lineTo(r*reach,r*width*.3);ctx.lineTo(r*.86,r*width);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(r*.98,0);ctx.lineTo(r*(reach-.06),0);ctx.stroke();ctx.restore();};
- if(phase>=2){
-  if(e.k==='k'){
-   for(let i=0;i<4;i++)plate(i*TAU/4+Math.PI/4,phase===3?1.52:1.34,.13,'#b18b49');
-   ctx.save();ctx.rotate(t*.12);ctx.strokeStyle='#ffe4aa';ctx.lineWidth=2*U;for(let i=0;i<4;i++){ctx.beginPath();A(0,0,r*1.27,i*TAU/4+.14,i*TAU/4+1.05);ctx.stroke();}ctx.restore();
-  }else if(e.k==='j'){
-   for(const side of [-1,1]){plate(side>0?0:Math.PI,phase===3?1.60:1.35,.38,'#ba8e70');for(let i=0;i<3;i++){ctx.fillStyle=phase===3?'#fff0a0':'#ff9754';ctx.fillRect(side*r*(1.05+i*.11)-r*.035,-r*.2,r*.07,r*.4);}}
-  }else if(e.k==='x'){
-   for(let i=0;i<(phase===3?6:3);i++)plate(i*TAU/(phase===3?6:3)-t*.13,phase===3?1.52:1.36,.17,elite?'#e4bd76':'#d08bda');
-  }else if(e.k==='q'){
-   for(let i=0;i<6;i++){plate(i*TAU/6,phase===3?1.48:1.28,.22,'#9bb958');ctx.save();ctx.rotate(i*TAU/6);ctx.fillStyle=phase===3?'#f4ffb8':'#d2e982';ctx.beginPath();hexPath(r*1.08,0,r*.105);ctx.fill();ctx.restore();}
-  }else if(e.k==='v'){
-   ctx.save();ctx.rotate(phase===3?.45:-.45);ctx.scale(1,.6);ctx.strokeStyle=pale;ctx.lineWidth=3*U;for(let i=0;i<2;i++){ctx.beginPath();A(0,0,r*(1.35+i*.15),t*.35+i*Math.PI,t*.35+i*Math.PI+2.7);ctx.stroke();}ctx.restore();
-   for(let i=0;i<(phase===3?6:3);i++)plate(i*TAU/(phase===3?6:3)+t*.2,1.28,.1,'#a27cd9');
-  }else if(e.k==='C'){
-   for(let i=0;i<(phase===3?8:4);i++){ctx.save();ctx.rotate(i*TAU/(phase===3?8:4)+t*.12);ctx.fillStyle=lin(r*.9,0,r*1.65,0,'#65b9e8','#ecffff');ctx.strokeStyle='#daffff';ctx.beginPath();ctx.moveTo(r*.9,-r*.07);ctx.lineTo(r*1.32,-r*.24);ctx.lineTo(r*1.23,-r*.02);ctx.lineTo(r*1.62,r*.06);ctx.lineTo(r*1.12,r*.24);ctx.lineTo(r*1.21,r*.06);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}
-  }else if(e.k==='E'){
-   for(let i=0;i<(phase===3?12:6);i++)plate(i*TAU/(phase===3?12:6)+t*.08,phase===3?1.52:1.36,.13,i%2?'#b695e0':'#ffcb79');
-  }
- }
- if(phase===3){
-  // Cracks and three outward chevrons distinguish the final phase even at Low quality.
-  ctx.strokeStyle=pale;ctx.lineWidth=1.6*U;
-  for(let i=0;i<3;i++){ctx.save();ctx.rotate(i*TAU/3+.3);ctx.beginPath();ctx.moveTo(r*.64,-r*.12);ctx.lineTo(r*.79,-r*.04);ctx.lineTo(r*.72,r*.08);ctx.lineTo(r*.96,r*.16);ctx.stroke();ctx.restore();}
-  if(e.k==='E'){disc(0,0,r*.65,'#23172e','#090b16');ctx.strokeStyle='#ffe5ac';ctx.lineWidth=3*U;ctx.beginPath();A(0,0,r*.69);ctx.stroke();}
- }
- if(elite){ctx.strokeStyle='#ffe4a0';ctx.lineWidth=2*U;for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*TAU/4);ctx.beginPath();ctx.moveTo(r*.92,-r*.07);ctx.lineTo(r*1.02,0);ctx.lineTo(r*.92,r*.07);ctx.stroke();ctx.restore();}}
+ const phase=S.p3?3:S.p2?2:1;if(phase===1)return;
+ const r=er(e),t=S.t;ctx.save();ctx.translate(e.x,e.y);
+ ctx.strokeStyle=phase===3?LIGHT[e.k]:HEX[e.k];ctx.lineWidth=(phase===3?2.5:1.5)*U;
+ const count=e.k==='j'?4:phase+1;
+ for(let i=0;i<count;i++){const a=i*TAU/count+(e.k==='j'?0:t*.12);ctx.beginPath();A(0,0,r*(e.k==='j'?.93:1.14),a+.12,a+(phase===3?1.05:.65));ctx.stroke();}
+ if(phase===3){ctx.lineWidth=1.2*U;for(let i=0;i<5;i++){const a=i*TAU/5;ctx.beginPath();ctx.moveTo(Math.cos(a)*r*.73,Math.sin(a)*r*.73);ctx.quadraticCurveTo(Math.cos(a+.1)*r*.81,Math.sin(a+.1)*r*.81,Math.cos(a+.06)*r*.96,Math.sin(a+.06)*r*.96);ctx.stroke();}}
  ctx.restore();
 };
 
@@ -4912,5 +4884,10 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){
   window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});
 }
 </script>
-</body>
+<script>
+(function(){const menu=document.getElementById('menu'),content=document.createElement('div');content.className='menuContent';for(const child of [...menu.children])if(child.tagName!=='CANVAS'&&child.id!=='menuMotion')content.appendChild(child);menu.appendChild(content);
+let pending=false;function fit(){pending=false;if(getComputedStyle(menu).display==='none')return;const scale=Math.min(1,(menu.clientHeight-48)/Math.max(1,content.scrollHeight));const value='translate(-50%,-50%) scale('+scale+')';if(content.style.transform!==value)content.style.transform=value;}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(fit);}}
+new ResizeObserver(schedule).observe(content);new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['data-mode','lang'],childList:true,subtree:true});window.addEventListener('resize',schedule);if(window.visualViewport)visualViewport.addEventListener('resize',schedule);document.fonts.ready.then(schedule);schedule();})();
+</script></body>
 </html>

@@ -3,7 +3,7 @@
    On each launch it does a tiny HEAD request; if the host reports a new
    ETag/Last-Modified for index.html it silently downloads the new version
    (used the NEXT time the game opens). No manual version bump needed. */
-const SHELL_CACHE = 'rtc-shell-v5';
+const SHELL_CACHE = 'rtc-shell-v6';
 const FONT_CACHE  = 'rtc-fonts-v1';
 const META_CACHE  = 'rtc-meta-v1';
 const SMALL = ['./language.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
