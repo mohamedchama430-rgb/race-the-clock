@@ -3,10 +3,10 @@
    On each launch it does a tiny HEAD request; if the host reports a new
    ETag/Last-Modified for index.html it silently downloads the new version
    (used the NEXT time the game opens). No manual version bump needed. */
-const SHELL_CACHE = 'rtc-shell-v6';
+const SHELL_CACHE = 'rtc-shell-v8';
 const FONT_CACHE  = 'rtc-fonts-v1';
 const META_CACHE  = 'rtc-meta-v1';
-const SMALL = ['./language.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
+const SMALL = ['./polish.css','./polish.js','./language.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
 const SIG_KEY = './__sig';
 
 const sigOf = r => (r.headers.get('etag') || '') + '|' + (r.headers.get('last-modified') || '');
@@ -16,7 +16,7 @@ async function loadSig(){ const c = await caches.open(META_CACHE); const r = awa
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(SHELL_CACHE);
-    const res = await fetch('./index.html');
+    const res = await fetch('./index.html', {cache: 'reload'});
     if (!res.ok) throw new Error('index.html fetch failed');
     await c.put('./index.html', res);
     await c.addAll(SMALL);
