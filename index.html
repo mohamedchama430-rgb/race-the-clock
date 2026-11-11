@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+<script src="./language.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="robots" content="noindex">
@@ -265,24 +266,39 @@ body[data-mode="menu"] #menu,body[data-mode="over"] #over,body[data-mode="pause"
 
 
 .tool:focus-visible{outline:3px solid #a1efdd;outline-offset:3px}
-#rtcSettings{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;background:rgba(5,8,16,.88);overflow-y:auto;padding:16px;box-sizing:border-box;color:#ece7da;font-family:Oxanium,system-ui}
-#rtcSettings .stBox{width:min(520px,100%);margin:auto;padding:20px;border:1px solid #7687a64d;border-radius:14px;background:#10192b;box-sizing:border-box}
-#rtcSettings h2{margin:0 0 6px;color:#ffe19a;font-size:24px}
-#rtcSettings .stSec{margin:16px 0 6px;font:800 11px Oxanium,system-ui;letter-spacing:.16em;color:#5ce1e6}
-#rtcSettings label,#rtcSettings .stRow{display:block;margin:10px 0;font-size:13px}
+#rtcSettings{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;background:rgba(5,8,16,.88);padding:16px;box-sizing:border-box;color:#ece7da;font-family:Oxanium,system-ui;backdrop-filter:blur(12px)}
+#rtcSettings .stBox{position:relative;width:min(520px,100%);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;padding:0 22px 22px;border:1px solid #7687a64d;border-radius:22px;background:linear-gradient(145deg,#19243a,#0d1424);box-shadow:0 24px 80px #0009;box-sizing:border-box;scrollbar-width:thin;scrollbar-color:#46516b #10192b}
+#rtcSettings .stHead{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 -22px 20px;padding:18px 22px;background:#131e32;border-bottom:1px solid #7687a633}
+#rtcSettings h2{margin:0;color:#ffe19a;font-size:23px}
+#rtcSettings .stSubtitle{margin:5px 0 0;color:#93a8bc;font-size:11px}
+#rtcSettings .stX{flex:none;width:44px;height:44px;border:1px solid #7687a655;border-radius:13px;background:#202d43;color:#edf5ff;font:28px/1 system-ui;cursor:pointer}
+#rtcSettings .stSec{margin:22px 0 12px;padding-bottom:9px;border-bottom:1px solid #7687a630;font:800 11px Oxanium,system-ui;letter-spacing:.18em;color:#5ce1e6}
+#rtcSettings label,#rtcSettings .stRow{display:block;margin:14px 0;font-size:13px}
 #rtcSettings label b{float:right;color:#f2c14e}
-#rtcSettings input[type=range]{width:100%;margin-top:6px;height:32px}
-#rtcSettings .sg{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-#rtcSettings .sg button{flex:1 1 70px;min-height:40px;border:1px solid #7687a66a;background:#151e30;color:#ece7da;border-radius:8px;font:700 12px Oxanium,system-ui;cursor:pointer}
-#rtcSettings .sg button.on{background:#f2c14e;color:#1a1305;border-color:#f2c14e}
-#rtcSettings .stNote{font-size:11px;color:#93a8bc;line-height:1.6;margin:14px 0}
-#rtcSettings .btn{width:100%}
+#rtcSettings input[type=range]{width:100%;margin-top:6px;height:30px;accent-color:#f2c14e}
+#rtcSettings .sg{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px;padding:5px;border:1px solid #7687a629;background:#080f1c88;border-radius:14px}
+#rtcSettings .sg button{flex:1 1 65px;min-height:44px;padding:9px 6px;border:1px solid transparent;background:transparent;color:#aebcd0;border-radius:10px;font:700 12px Oxanium,system-ui;cursor:pointer}
+#rtcSettings .sg button.on{background:linear-gradient(135deg,#ffe19a,#f2c14e);color:#211806;border-color:#ffe19a;box-shadow:0 3px 12px #f2c14e22}
+#rtcSettings button:hover{filter:brightness(1.12)}
+#rtcSettings button:focus-visible,#rtcSettings input:focus-visible{outline:2px solid #5ce1e6;outline-offset:3px}
+#rtcSettings .stHint{font-size:11px;color:#93a8bc;line-height:1.6;margin:8px 0 0}
+#rtcSettings .stNote{font-size:11px;color:#93a8bc;line-height:1.6;margin:20px 0}
+#rtcSettings .btn{width:100%;min-height:46px;border-radius:12px}
+@media(max-width:400px){#rtcSettings{padding:8px}#rtcSettings .stBox{max-height:calc(100dvh - 16px);padding:0 16px 16px;border-radius:17px}#rtcSettings .stHead{margin:0 -16px 16px;padding:14px 16px}}
+
 #rtcTut{display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(460px,92vw);z-index:15;pointer-events:none;box-sizing:border-box;padding:10px 14px;border:1px solid #f2c14e88;border-radius:12px;background:rgba(10,18,32,.9);color:#ece7da;font-family:Oxanium,system-ui;text-align:center}
 #rtcTut b{display:block;color:#f2c14e;font-size:11px;letter-spacing:.16em;margin-bottom:4px}
 #rtcTut span{font-size:13px;line-height:1.5}
 .modeCard.locked{opacity:.5;filter:grayscale(.7);cursor:not-allowed}
 #tools .tool:not(#pauseBtn){display:none!important}
 
+
+html[lang=ar] body,html[lang=ar] button,html[lang=ar] input,html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] h3{font-family:Tahoma,Arial,sans-serif!important;letter-spacing:0!important}
+html[lang=ar] .stBox,html[lang=ar] .box,html[lang=ar] .acCard,html[lang=ar] .bossLesson{text-align:right}
+html[lang=ar] #rtcSettings label b{float:left}
+html[lang=ar] .logo h1{line-height:1.2}
+html[lang=ar] .acBtn,html[lang=ar] .acBig{text-align:right}
+html[lang=ar] .keyboardHint,html[lang=ar] .stepper,html[lang=ar] #rtcSettings [data-k=language]{direction:ltr}
 </style>
 <script src="lb-config.js"></script>
 <script id="pwaInstall">
@@ -687,7 +703,7 @@ document.addEventListener('DOMContentLoaded',function(){
  if(bx){var b=document.createElement('button');b.id='lbBtn';b.type='button';b.className='btn alt';b.textContent='🏆 Leaderboard';b.addEventListener('click',openLB);bx.appendChild(b);
   who=document.createElement('div');who.id='lbWho';bx.parentNode.insertBefore(who,bx.nextSibling);}
  var sp=document.getElementById('rtcSettings'),h2=sp&&sp.querySelector('.stBox h2');
- if(h2){h2.insertAdjacentHTML('afterend','<div class="stSec">ACCOUNT</div><div id="rtcAcct" class="acCard"></div>');accHost=document.getElementById('rtcAcct');
+ if(h2){h2.closest('.stHead').insertAdjacentHTML('afterend','<div class="stSec">ACCOUNT</div><div id="rtcAcct" class="acCard"></div>');accHost=document.getElementById('rtcAcct');
   accHost.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
    if(a==='welcome')scrWelcome();else if(a==='rename')openRename();else if(a==='link')openLink();else if(a==='manage')scrManage();else if(a==='logout')scrLogoutConfirm();else if(a==='admin'){admTab='ov';scrAdmin();}else if(a==='news')scrNews();});
   new MutationObserver(function(){if(sp.style.display==='flex')refreshAccount();}).observe(sp,{attributes:true,attributeFilter:['style']});}
@@ -1158,7 +1174,7 @@ const BOSSNAME={x:'The Guardian',j:'The Juggernaut',k:'Chronos',q:'The Hive',v:'
 /* ---------- field guide data ---------- */
 const GUIDE=[
  {id:'c',kind:'enemy',name:'Spiker',role:'Chaser',when:'From Stage 1',threat:1,
-  desc:'A spiked hunter that homes in on you and never stops. Its eye always follows you.',
+  desc:'A spiked hunter that homes in on you and never stops. Its crystal reactor pulses as it hunts.',
   tip:'Run in wide arcs. It turns slowly, so you can circle around it.'},
  {id:'b',kind:'enemy',name:'Ricochet',role:'Bouncer',when:'From Stage 2',threat:2,
   desc:'A spinning crystal that ricochets off the walls in straight lines. It does not aim at you.',
@@ -1203,8 +1219,8 @@ const GUIDE=[
   desc:'An upgraded Gravity Well. Three times in its life it turns into a black hole for 5 seconds: its pull and reach grow and its core swells. The pull is strongest near the core, and touching the black core costs you 1 heart, after which the black hole is absorbed and disappears. There is a calm pause between each surge.',
   tip:'Stay far from it before a surge and use the pauses to reposition. Once it appears, the old Gravity Well is gone.'},
  {id:'z',kind:'enemy',name:'Spiker V2',role:'Dash Chaser',when:'From Stage 21',threat:4,
-  desc:'An upgraded Spiker. It hunts you like before, but every 6 seconds its eye flashes and it lunges at about one and a half times its speed for under half a second.',
-  tip:'Do not rely on wide circles. When the eye flashes, change direction and keep your distance. Once Spiker V2 appears, the old Spiker is gone.'},
+  desc:'An upgraded Spiker. It hunts you like before, but every 6 seconds its crystal reactor flashes and it lunges at about one and a half times its speed for under half a second.',
+  tip:'Do not rely on wide circles. When the crystal reactor flashes, change direction and keep your distance. Once Spiker V2 appears, the old Spiker is gone.'},
  {id:'u',kind:'enemy',name:'Ricochet V2',role:'Spike Layer',when:'From Stage 22',threat:4,
   desc:'An upgraded Ricochet: a bigger, faster crystal that bounces off the walls. Its core charges up, then it drops a spike that stays for 5 seconds.',
   tip:'Do not cut corners. Watch the floor, not just the crystal, and plan a path between the spikes.'},
@@ -2553,6 +2569,48 @@ function drawClone(e){
   thinLine=function(){const g=grayOn;grayOn=false;try{return _tl.apply(this,arguments);}finally{grayOn=g;}};
   beam=function(){const g=grayOn;grayOn=false;try{return _bm.apply(this,arguments);}finally{grayOn=g;}};
 }
+// All ornaments are cosmetic: collision radii and attack cues remain unchanged.
+function drawFacetedCore(x,y,r,t,color,light,elite){
+ ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);
+ ctx.fillStyle='#250f23';ctx.fillRect(-r*.76,-r*.76,r*1.52,r*1.52);
+ ctx.strokeStyle=elite?'#ffe6a0':light;ctx.lineWidth=Math.max(1,r*.11);ctx.strokeRect(-r*.76,-r*.76,r*1.52,r*1.52);
+ const colors=[light,color,'#571e40',color];
+ for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*TAU/4);ctx.fillStyle=colors[i];ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-r*.57,-r*.57);ctx.lineTo(r*.57,-r*.57);ctx.closePath();ctx.fill();ctx.restore();}
+ ctx.strokeStyle=elite?'#fff2be':'#ffc5d7';ctx.lineWidth=Math.max(1,r*.07);ctx.beginPath();ctx.moveTo(-r*.46,-r*.46);ctx.lineTo(r*.46,r*.46);ctx.moveTo(r*.46,-r*.46);ctx.lineTo(-r*.46,r*.46);ctx.stroke();
+ if(elite){for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*TAU/4);ctx.fillStyle='#ffdb83';ctx.fillRect(-r*.17,-r*1.03,r*.34,r*.13);ctx.restore();}}
+ ctx.restore();
+}
+function drawPhantomSeal(x,y,r,royal,t){
+ ctx.save();ctx.translate(x,y);ctx.lineJoin='round';
+ ctx.fillStyle=lin(0,-r*.72,0,r*.62,'#3a305a','#110e29');
+ ctx.beginPath();ctx.moveTo(0,-r*.75);ctx.lineTo(r*.62,-r*.36);ctx.lineTo(r*.48,r*.35);ctx.lineTo(0,r*.65);ctx.lineTo(-r*.48,r*.35);ctx.lineTo(-r*.62,-r*.36);ctx.closePath();ctx.fill();
+ ctx.strokeStyle=royal?'#ffe0a2':'#d9ceff';ctx.lineWidth=Math.max(1,r*.07);ctx.stroke();
+ // One continuous sigil, with no eye sockets or pupils.
+ ctx.strokeStyle=royal?'#ffda7c':'#c6b5ff';ctx.lineWidth=Math.max(1.2,r*.09);ctx.beginPath();ctx.moveTo(0,-r*.48);ctx.lineTo(-r*.2,-r*.12);ctx.lineTo(r*.18,r*.12);ctx.lineTo(0,r*.43);ctx.moveTo(0,-r*.48);ctx.lineTo(0,r*.43);ctx.stroke();
+ ctx.restore();
+}
+function drawGuardianSeal(x,y,r,t,elite){
+ ctx.save();ctx.translate(x,y);ctx.rotate(t*.18);
+ ctx.fillStyle=lin(-r,-r,r,r,'#65356f','#170e2a');ctx.beginPath();hexPath(0,0,r);ctx.fill();ctx.strokeStyle=elite?'#ffe4a1':'#ffd2f5';ctx.lineWidth=Math.max(1.5,r*.09);ctx.stroke();
+ for(let i=0;i<3;i++){ctx.save();ctx.rotate(i*TAU/3);ctx.fillStyle=elite?'#e6bd74':'#bf79d1';ctx.beginPath();ctx.moveTo(0,-r*.75);ctx.lineTo(r*.19,-r*.14);ctx.lineTo(0,r*.05);ctx.lineTo(-r*.19,-r*.14);ctx.closePath();ctx.fill();ctx.restore();}
+ ctx.strokeStyle='#ffecff';ctx.lineWidth=Math.max(1,r*.06);ctx.beginPath();hexPath(0,0,r*.28);ctx.stroke();ctx.restore();
+}
+function drawChronosDial(e,r,hands,t){
+ const phase=S.p3?3:S.p2?2:1,metal=phase===3?'#ffd2a0':'#f5d187';
+ drawGlow(e.x,e.y,r*2.35,[255,174,75],.45);
+ ctx.save();ctx.translate(e.x,e.y);
+ ctx.save();ctx.rotate(-t*.12);gearPath(24,r*1.02,r*1.18);ctx.fillStyle=lin(-r,-r,r,r,'#efd291','#70502c');ctx.fill();ctx.strokeStyle='#ffe4aa';ctx.lineWidth=1.5*U;ctx.stroke();ctx.restore();
+ disc(0,0,r*.99,'#26333c','#0c1420');
+ ctx.strokeStyle=metal;ctx.lineWidth=2*U;ctx.beginPath();A(0,0,r*.94);ctx.stroke();
+ for(let i=0;i<60;i++){const a=i/60*TAU-Math.PI/2,big=i%5===0;ctx.strokeStyle=big?'#ffe5ac':'#817965';ctx.lineWidth=(big?1.7:.7)*U;ctx.beginPath();ctx.moveTo(Math.cos(a)*r*(big?.78:.86),Math.sin(a)*r*(big?.78:.86));ctx.lineTo(Math.cos(a)*r*.90,Math.sin(a)*r*.90);ctx.stroke();}
+ // Visible escapement wheels beneath the dial hands.
+ for(let i=0;i<3;i++){const a=i*TAU/3-Math.PI/2;ctx.save();ctx.translate(Math.cos(a)*r*.36,Math.sin(a)*r*.36);ctx.rotate(t*(i%2?-.7:.5));gearPath(10,r*.16,r*.22);ctx.fillStyle='#82623a';ctx.fill();ctx.strokeStyle='#d3b478';ctx.lineWidth=.8*U;ctx.stroke();disc(0,0,r*.07,'#bbc6c8','#485665');ctx.restore();}
+ ctx.fillStyle='#ffe7ae';ctx.font='700 '+Math.max(7,r*.19)+'px Georgia,serif';ctx.textAlign='center';ctx.textBaseline='middle';
+ for(let i=0;i<4;i++){const a=i*TAU/4-Math.PI/2;ctx.fillText(['XII','III','VI','IX'][i],Math.cos(a)*r*.67,Math.sin(a)*r*.67);}
+ hands.forEach((a,i)=>{ctx.save();ctx.rotate(a);const len=r*(i===0?.56:i===1?.78:.85);ctx.fillStyle=i===2?'#ff987d':i?'#f8e6b5':'#d2f6ff';ctx.strokeStyle='#1a2633';ctx.lineWidth=1*U;ctx.beginPath();ctx.moveTo(-r*.18,0);ctx.lineTo(r*.12,-r*.065);ctx.lineTo(len,0);ctx.lineTo(r*.12,r*.065);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();});
+ disc(0,0,r*.12,'#fff0c6','#ad7735');ctx.restore();
+}
+
 function drawEnemy(e){
   const r=er(e),rgb=RGB[e.k],hex=HEX[e.k],rgbS=rgb.join(','),lt=LIGHT[e.k],dk=DARK[e.k];
   const tp=S.t,boss=isBoss(e);
@@ -2585,19 +2643,14 @@ function drawEnemy(e){
   }
 
   if(boss&&S.p2&&!e.demo)drawGlow(e.x,e.y,rr*3.6,[255,60,60],.3+.15*Math.sin(tp*8));
-  if(e.k==='c'){ // Spiker: layered spikes, angry eye
+  if(e.k==='c'){ // Spiker: layered spikes, faceted reactor
     drawGlow(e.x,e.y,rr*3.4,rgb,.55);
     ctx.save();ctx.translate(e.x,e.y);
     ctx.fillStyle=dk;polyStar(10,rr*1.55,rr*.9,tp*.9);ctx.fill();
     ctx.fillStyle=hex;polyStar(10,rr*1.28,rr*.8,-tp*1.5);ctx.fill();
     ctx.strokeStyle='rgba(255,220,220,.5)';ctx.lineWidth=1.2;ctx.stroke();
     ctx.restore();
-    disc(e.x,e.y,rr*.82,lt,dk);
-    ctx.fillStyle='#fff3f3';ctx.beginPath();A(e.x+ux*rr*.1,e.y+uy*rr*.1,rr*.44);ctx.fill();
-    ctx.fillStyle='#ff2d3a';ctx.beginPath();A(e.x+ux*rr*.22,e.y+uy*rr*.22,rr*.26);ctx.fill();
-    ctx.fillStyle='#14040a';ctx.beginPath();A(e.x+ux*rr*.28,e.y+uy*rr*.28,rr*.13);ctx.fill();
-    ctx.fillStyle=dk;ctx.beginPath();
-    ctx.moveTo(e.x-rr*.55,e.y-rr*.58);ctx.lineTo(e.x+rr*.55,e.y-rr*.16);ctx.lineTo(e.x+rr*.55,e.y-rr*.58);ctx.closePath();ctx.fill();
+    drawFacetedCore(e.x,e.y,rr*.78,tp,hex,lt,false);
   }else if(e.k==='z'){ // Spiker V2: armored spiker with dash flash
     const wind=e.dash<=0&&e.t2<.3&&e.t2>0,dsh=e.dash>0,pulse=dsh?1:(wind?.5+.5*Math.sin(tp*60):0);
     drawGlow(e.x,e.y,rr*(3.6+pulse*1.6),rgb,.55+.35*pulse);
@@ -2608,12 +2661,7 @@ function drawEnemy(e){
     ctx.strokeStyle='rgba(255,230,200,.65)';ctx.lineWidth=1.4;ctx.stroke();
     ctx.strokeStyle='rgba(255,210,63,'+(.55+.4*pulse)+')';ctx.lineWidth=1.6;ctx.beginPath();A(0,0,rr*1.05);ctx.stroke();
     ctx.restore();
-    disc(e.x,e.y,rr*.86,lt,dk);
-    ctx.fillStyle=dsh?'#fff6c8':'#fff3f3';ctx.beginPath();A(e.x+ux*rr*.1,e.y+uy*rr*.1,rr*.46);ctx.fill();
-    ctx.fillStyle=pulse>.4?'#ffd23f':'#ff2d3a';ctx.beginPath();A(e.x+ux*rr*.22,e.y+uy*rr*.22,rr*.28);ctx.fill();
-    ctx.fillStyle='#14040a';ctx.beginPath();A(e.x+ux*rr*.28,e.y+uy*rr*.28,rr*.13);ctx.fill();
-    ctx.fillStyle=dk;ctx.beginPath();
-    ctx.moveTo(e.x-rr*.58,e.y-rr*.62);ctx.lineTo(e.x+rr*.58,e.y-rr*.1);ctx.lineTo(e.x+rr*.58,e.y-rr*.62);ctx.closePath();ctx.fill();
+    drawFacetedCore(e.x,e.y,rr*.84,tp,pulse>.4?'#ffd23f':hex,lt,true);
     if(dsh)sparks(e.x,e.y,rr*2.2,5,tp,'#ffd9b0',rr*.16,5);
   }else if(e.k==='b'){ // Ricochet: faceted crystal
     drawGlow(e.x,e.y,rr*3.4,rgb,.55);
@@ -2652,19 +2700,13 @@ function drawEnemy(e){
     sparks(e.x,e.y,rr*2.1,4,tp,'#ffd9b0',rr*.13,3.4);
   }else if(e.k==='G'){ // Ghost wisp: a tiny phantom flying in a straight line
     const al=e.life<1.2?.55+.3*Math.sin(tp*30):1,wv=Math.sin(tp*12+e.x*.05)*rr*.16;
-    const hx=sp>1?e.vx/sp:0,hy=sp>1?e.vy/sp:0;
     drawGlow(e.x,e.y,rr*3.2,rgb,.45*al);
     ctx.save();ctx.translate(e.x,e.y);ctx.globalAlpha=al;
     ctx.fillStyle=lin(0,-rr*1.1,0,rr*1.1,'#ffffff','#8f86d8');
     ctx.beginPath();A(0,-rr*.1,rr*1.05,Math.PI,0);
     ctx.lineTo(rr*1.05,rr*1.05);ctx.lineTo(rr*.55,rr*.7+wv);ctx.lineTo(rr*.1,rr*1.1);ctx.lineTo(-rr*.4,rr*.7-wv);ctx.lineTo(-rr*1.05,rr*1.05);
     ctx.closePath();ctx.fill();
-    ctx.fillStyle='#1b1540';
-    ctx.beginPath();A(-rr*.36,-rr*.15,rr*.24);ctx.fill();
-    ctx.beginPath();A(rr*.36,-rr*.15,rr*.24);ctx.fill();
-    ctx.fillStyle='#ffd86b';
-    ctx.beginPath();A(-rr*.36+hx*rr*.1,-rr*.15+hy*rr*.1,rr*.1);ctx.fill();
-    ctx.beginPath();A(rr*.36+hx*rr*.1,-rr*.15+hy*rr*.1,rr*.1);ctx.fill();
+    drawPhantomSeal(0,0,rr,true,tp);
     ctx.restore();ctx.globalAlpha=1;
   }else if(e.k==='n'){ // Spike
     const bl=e.life<1.3&&Math.floor(tp*10)%2===0;
@@ -2849,7 +2891,7 @@ function drawEnemy(e){
     ctx.fillStyle=lin(-rr,0,rr*1.8,0,dk,'#ffd0b0');
     ctx.beginPath();ctx.moveTo(rr*1.8,0);ctx.lineTo(-rr*.6,rr*1.0);ctx.lineTo(-rr*.2,0);ctx.lineTo(-rr*.6,-rr*1.0);ctx.closePath();ctx.fill();
     ctx.restore();
-  }else if(e.k==='h'||e.k==='H'){ // Phantom (and the crowned Phantom V2): gradient ghost with wisps and tracking eyes
+  }else if(e.k==='h'||e.k==='H'){ // Phantom (and the crowned Phantom V2): spectral cloak with wisps and a sealed rune mask
     let al=1;
     if(e.ph===1)al=Math.max(0,e.pt/.45);
     else if(e.ph===2)al=.22+.18*Math.sin(tp*20);
@@ -2867,13 +2909,7 @@ function drawEnemy(e){
     const wv=Math.sin(tp*8)*rr*.14;
     ctx.lineTo(rr*1.05,rr*1.05);ctx.lineTo(rr*.55,rr*.7+wv);ctx.lineTo(rr*.1,rr*1.1);ctx.lineTo(-rr*.4,rr*.7-wv);ctx.lineTo(-rr*1.05,rr*1.05);
     ctx.closePath();ctx.fill();
-    ctx.fillStyle='#1b1540';
-    ctx.beginPath();A(-rr*.38,-rr*.18,rr*.24);ctx.fill();
-    ctx.beginPath();A(rr*.38,-rr*.18,rr*.24);ctx.fill();
-    ctx.fillStyle=e.k==='H'?'#ffd86b':'#c9bfff';
-    ctx.beginPath();A(-rr*.38+ux*rr*.08,-rr*.18+uy*rr*.08,rr*.1);ctx.fill();
-    ctx.beginPath();A(rr*.38+ux*rr*.08,-rr*.18+uy*rr*.08,rr*.1);ctx.fill();
-    ctx.fillStyle='#1b1540';ctx.beginPath();A(0,rr*.32,rr*.12);ctx.fill();
+    drawPhantomSeal(0,-rr*.05,rr,e.k==='H',tp);
     if(e.k==='H'){ // royal guard: two little ghosts float at its sides (visual only, they cannot hurt you)
       const gs=rr*.46;
       for(const sd of [-1,1]){
@@ -2885,12 +2921,7 @@ function drawEnemy(e){
         ctx.lineTo(gx+gs*1.05,gy+gs*1.05);ctx.lineTo(gx+gs*.55,gy+gs*.7+gw);ctx.lineTo(gx+gs*.1,gy+gs*1.1);ctx.lineTo(gx-gs*.4,gy+gs*.7-gw);ctx.lineTo(gx-gs*1.05,gy+gs*1.05);
         ctx.closePath();ctx.fill();
         ctx.strokeStyle='rgba(255,214,107,.85)';ctx.lineWidth=Math.max(1,gs*.1);ctx.stroke();
-        ctx.fillStyle='#1b1540';
-        ctx.beginPath();A(gx-gs*.36,gy-gs*.15,gs*.24);ctx.fill();
-        ctx.beginPath();A(gx+gs*.36,gy-gs*.15,gs*.24);ctx.fill();
-        ctx.fillStyle='#ffd86b';
-        ctx.beginPath();A(gx-gs*.36+ux*gs*.1,gy-gs*.15+uy*gs*.1,gs*.1);ctx.fill();
-        ctx.beginPath();A(gx+gs*.36+ux*gs*.1,gy-gs*.15+uy*gs*.1,gs*.1);ctx.fill();
+        drawPhantomSeal(gx,gy,gs,true,tp);
       }
       // regal touches on the king: golden hem, drifting gold sparks
       ctx.strokeStyle='rgba(255,214,107,.9)';ctx.lineWidth=Math.max(1,rr*.07);
@@ -3024,11 +3055,7 @@ function drawEnemy(e){
       ctx.fillStyle='#ffd1f3';ctx.beginPath();A(Math.cos(a)*rr*1.32,Math.sin(a)*rr*1.32,rr*.15);ctx.fill();
     }
     ctx.restore();
-    const pulse=1+.1*Math.sin(tp*6);
-    disc(e.x,e.y,rr*.46*pulse,'#4a0a44','#12020f');
-    ctx.fillStyle='#ffe3fa';ctx.beginPath();A(e.x+ux*rr*.08,e.y+uy*rr*.08,rr*.27);ctx.fill();
-    ctx.fillStyle='#ff4fd8';ctx.beginPath();A(e.x+ux*rr*.14,e.y+uy*rr*.14,rr*.17);ctx.fill();
-    ctx.fillStyle='#12020f';ctx.beginPath();A(e.x+ux*rr*.18,e.y+uy*rr*.18,rr*.08);ctx.fill();
+    drawGuardianSeal(e.x,e.y,rr*.62,tp,e.tier>0);
   }else if(e.k==='j'){ // The Juggernaut: armor plates and furnace eye
     if(e.ph===1){
       const al=.2+.3*Math.abs(Math.sin(tp*26));
@@ -3069,18 +3096,7 @@ function drawEnemy(e){
       thinLine(e.x,e.y,hands[1]-SNAP,'255,255,255',al,2.5,true,CL);
       if(hands[2]!==undefined)thinLine(e.x,e.y,hands[2]+SNAP,'255,255,255',al,2.5,true,CL*.9);
     }
-    drawGlow(e.x,e.y,rr*2.8,rgb,.6+.1*Math.sin(tp*3));
-    disc(e.x,e.y,rr*1.12,'#4a3010','#150d03');
-    ctx.strokeStyle=hex;ctx.lineWidth=4*U;ctx.beginPath();A(e.x,e.y,rr*1.08);ctx.stroke();
-    ctx.save();ctx.translate(e.x,e.y);
-    ctx.strokeStyle='rgba(255,224,160,.9)';
-    for(let i=0;i<12;i++){const a=i/12*TAU,big=i%3===0;ctx.lineWidth=(big?3.5:2)*U;ctx.beginPath();ctx.moveTo(Math.cos(a)*rr*(big?.72:.82),Math.sin(a)*rr*(big?.72:.82));ctx.lineTo(Math.cos(a)*rr*.98,Math.sin(a)*rr*.98);ctx.stroke();}
-    ctx.rotate(tp*.3);gearPath(16,rr*.5,rr*.6);ctx.fillStyle='rgba(255,200,120,.14)';ctx.fill();ctx.strokeStyle='rgba(255,200,120,.45)';ctx.lineWidth=1.2;ctx.stroke();
-    ctx.rotate(-tp*.3);
-    ctx.lineCap='round';
-    for(const a of hands){ctx.strokeStyle='#ffe3a8';ctx.lineWidth=4*U;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*rr*.95,Math.sin(a)*rr*.95);ctx.stroke();}
-    ctx.restore();
-    disc(e.x,e.y,rr*.2,'#ffffff','#ffb347');
+    drawChronosDial(e,rr,hands,tp);
   }else if(e.k==='o'){ // Orbiter: gyroscope that dives
     drawGlow(e.x,e.y,rr*3.2,rgb,.55);
     if(e.ph===1)thinLine(e.x,e.y,e.ang,'255,210,63',.35+.5*Math.abs(Math.sin(tp*30)),2.5,true);
@@ -4186,17 +4202,14 @@ drawEnemy=function(e){
  const r=er(e),p3=S.p3&&!e.demo,phase=p3?3:S.p2&&!e.demo?2:1,t=S.t,col=RGB[e.k].join(',');
  ctx.save();ctx.translate(e.x,e.y);ctx.globalAlpha=e.warm>0?.45:1;ctx.lineJoin='round';
  if(e.k==='k'){
-  // Engraved counter-rotating brass crown, with twelve jewel bearings.
-  ctx.save();ctx.rotate(-t*.16);gearPath(24,r*1.09,r*1.20);ctx.fillStyle=lin(-r,-r,r,r,'#b17d32','#302213');ctx.fill();ctx.strokeStyle='#ffdb8c';ctx.lineWidth=1.2*U;ctx.stroke();ctx.restore();
-  for(let i=0;i<12;i++){const a=i/12*TAU;disc(Math.cos(a)*r*1.12,Math.sin(a)*r*1.12,r*.045,phase===3?'#ffffff':'#ffefd0',phase===3?'#ff8063':'#e4ad52');}
-  ctx.strokeStyle='rgba(255,238,181,.6)';ctx.lineWidth=1*U;ctx.beginPath();A(0,0,r*.72,-2.7,-.6);ctx.stroke();
+  // Chronos dial, bearings and hands are rendered together in drawChronosDial.
  }else if(e.k==='j'){
   // Heavy beveled armor, cooling vents, and a three-stage furnace.
   for(let side of [-1,1]){ctx.save();ctx.scale(side,1);ctx.fillStyle=lin(r*.35,-r,r,-r*.3,'#cba789','#43302b');ctx.beginPath();ctx.moveTo(r*.32,-r*.62);ctx.lineTo(r*.73,-r*.99);ctx.lineTo(r*1.02,-r*.56);ctx.lineTo(r*.74,-r*.23);ctx.closePath();ctx.fill();ctx.strokeStyle='#e8b29488';ctx.lineWidth=1.5*U;ctx.stroke();
    for(let i=0;i<3;i++){ctx.strokeStyle=phase===3?'#ffeb9b':'#ec8d4d';ctx.lineWidth=2*U;ctx.beginPath();ctx.moveTo(r*(.5+i*.11),-r*.64);ctx.lineTo(r*(.61+i*.11),-r*.45);ctx.stroke();}ctx.restore();}
   for(let i=0;i<3;i++)disc((i-1)*r*.23,r*.58,r*.075,i<phase?'#fff2b0':'#583129',i<phase?'#ff7742':'#251a18');
  }else if(e.k==='x'){
-  // Rotating segmented prism armor, keeping the eye and weapon ring visible.
+  // Rotating segmented prism armor, keeping the geometric seal and weapon ring visible.
   for(let i=0;i<6;i++){ctx.save();ctx.rotate(i/6*TAU+t*.15);ctx.fillStyle=lin(r*.83,0,r*1.18,0,'#e6b6ed','#582d64');ctx.beginPath();ctx.moveTo(r*.88,-r*.16);ctx.lineTo(r*1.14,-r*.10);ctx.lineTo(r*1.20,r*.12);ctx.lineTo(r*.89,r*.20);ctx.closePath();ctx.fill();ctx.strokeStyle='#ffe1ff99';ctx.lineWidth=1;ctx.stroke();ctx.restore();}
   ctx.strokeStyle=p3?'#fff2fa':'#f3b9ed';ctx.lineWidth=1.5*U;ctx.beginPath();A(0,0,r*.55,0,TAU);ctx.stroke();
  }else if(e.k==='q'){
@@ -4705,6 +4718,43 @@ deluxeFloor=function(){if(bgIdx<5)return oldDeluxeFloor();const key='extra:'+bgI
 const oldDemoCaption=demoCaption;
 demoCaption=function(D){if(D.en.kind==='boss'){const e=D.main,phase=S.p3?3:S.p2?2:1;if(e&&e.p3Warn)return 'PHASE 3: '+BOSS_FINAL[e.k]+' — move to the gap!';return 'PHASE '+phase+' · '+Math.ceil(S.left)+'s left · '+bossLessons[D.en.id][phase-1][0];}return oldDemoCaption(D);};
 
+/* Phase evolution: distinct silhouettes for all seven bosses and repeat tiers. */
+const beforePhaseEvolution=drawEnemy;
+drawEnemy=function(e){
+ beforePhaseEvolution(e);if(!isBoss(e)||e.dead||e.warm>0)return;
+ const phase=S.p3?3:S.p2?2:1,r=er(e),t=S.t,elite=e.tier>0;
+ ctx.save();ctx.translate(e.x,e.y);ctx.lineJoin='round';ctx.lineWidth=1.4*U;
+ const pale={k:'#ffe8b7',j:'#ffd0a1',x:'#f7ceff',q:'#ddffa6',v:'#e9c9ff',C:'#c4f6ff',E:'#ffdda8'}[e.k];
+ const plate=(a,reach,width,color)=>{ctx.save();ctx.rotate(a);ctx.fillStyle=lin(r*.8,0,r*reach,0,color,DARK[e.k]);ctx.strokeStyle=pale;ctx.beginPath();ctx.moveTo(r*.86,-r*width);ctx.lineTo(r*reach,-r*width*.3);ctx.lineTo(r*(reach+.08),0);ctx.lineTo(r*reach,r*width*.3);ctx.lineTo(r*.86,r*width);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(r*.98,0);ctx.lineTo(r*(reach-.06),0);ctx.stroke();ctx.restore();};
+ if(phase>=2){
+  if(e.k==='k'){
+   for(let i=0;i<4;i++)plate(i*TAU/4+Math.PI/4,phase===3?1.52:1.34,.13,'#b18b49');
+   ctx.save();ctx.rotate(t*.12);ctx.strokeStyle='#ffe4aa';ctx.lineWidth=2*U;for(let i=0;i<4;i++){ctx.beginPath();A(0,0,r*1.27,i*TAU/4+.14,i*TAU/4+1.05);ctx.stroke();}ctx.restore();
+  }else if(e.k==='j'){
+   for(const side of [-1,1]){plate(side>0?0:Math.PI,phase===3?1.60:1.35,.38,'#ba8e70');for(let i=0;i<3;i++){ctx.fillStyle=phase===3?'#fff0a0':'#ff9754';ctx.fillRect(side*r*(1.05+i*.11)-r*.035,-r*.2,r*.07,r*.4);}}
+  }else if(e.k==='x'){
+   for(let i=0;i<(phase===3?6:3);i++)plate(i*TAU/(phase===3?6:3)-t*.13,phase===3?1.52:1.36,.17,elite?'#e4bd76':'#d08bda');
+  }else if(e.k==='q'){
+   for(let i=0;i<6;i++){plate(i*TAU/6,phase===3?1.48:1.28,.22,'#9bb958');ctx.save();ctx.rotate(i*TAU/6);ctx.fillStyle=phase===3?'#f4ffb8':'#d2e982';ctx.beginPath();hexPath(r*1.08,0,r*.105);ctx.fill();ctx.restore();}
+  }else if(e.k==='v'){
+   ctx.save();ctx.rotate(phase===3?.45:-.45);ctx.scale(1,.6);ctx.strokeStyle=pale;ctx.lineWidth=3*U;for(let i=0;i<2;i++){ctx.beginPath();A(0,0,r*(1.35+i*.15),t*.35+i*Math.PI,t*.35+i*Math.PI+2.7);ctx.stroke();}ctx.restore();
+   for(let i=0;i<(phase===3?6:3);i++)plate(i*TAU/(phase===3?6:3)+t*.2,1.28,.1,'#a27cd9');
+  }else if(e.k==='C'){
+   for(let i=0;i<(phase===3?8:4);i++){ctx.save();ctx.rotate(i*TAU/(phase===3?8:4)+t*.12);ctx.fillStyle=lin(r*.9,0,r*1.65,0,'#65b9e8','#ecffff');ctx.strokeStyle='#daffff';ctx.beginPath();ctx.moveTo(r*.9,-r*.07);ctx.lineTo(r*1.32,-r*.24);ctx.lineTo(r*1.23,-r*.02);ctx.lineTo(r*1.62,r*.06);ctx.lineTo(r*1.12,r*.24);ctx.lineTo(r*1.21,r*.06);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}
+  }else if(e.k==='E'){
+   for(let i=0;i<(phase===3?12:6);i++)plate(i*TAU/(phase===3?12:6)+t*.08,phase===3?1.52:1.36,.13,i%2?'#b695e0':'#ffcb79');
+  }
+ }
+ if(phase===3){
+  // Cracks and three outward chevrons distinguish the final phase even at Low quality.
+  ctx.strokeStyle=pale;ctx.lineWidth=1.6*U;
+  for(let i=0;i<3;i++){ctx.save();ctx.rotate(i*TAU/3+.3);ctx.beginPath();ctx.moveTo(r*.64,-r*.12);ctx.lineTo(r*.79,-r*.04);ctx.lineTo(r*.72,r*.08);ctx.lineTo(r*.96,r*.16);ctx.stroke();ctx.restore();}
+  if(e.k==='E'){disc(0,0,r*.65,'#23172e','#090b16');ctx.strokeStyle='#ffe5ac';ctx.lineWidth=3*U;ctx.beginPath();A(0,0,r*.69);ctx.stroke();}
+ }
+ if(elite){ctx.strokeStyle='#ffe4a0';ctx.lineWidth=2*U;for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*TAU/4);ctx.beginPath();ctx.moveTo(r*.92,-r*.07);ctx.lineTo(r*1.02,0);ctx.lineTo(r*.92,r*.07);ctx.stroke();ctx.restore();}}
+ ctx.restore();
+};
+
 /* ---------- Classic Stage 1 tutorial ---------- */
 const TUT_STEPS=[
  ['STEP 1 / 4 · MOVE','Drag anywhere on the screen to move your hero.<br>Keyboard: arrow keys or WASD.'],
@@ -4734,15 +4784,58 @@ function tutComplete(){
  refreshMenu();
 }
 setInterval(()=>{tutEl.style.display=(run.tutorial&&(mode==='play'||mode==='pause'))?'block':'none';},150);
+// Register original strings without changing simulation data or saved records.
+const arabicLessons={
+ k:[['آلية الساعة','عقارب دوّارة وحلقات رصاص وقنابل زمنية. الخطوط الشبحية تحذّر من قفزة العقارب.','تحرّك بعد مرور العقرب وابتعد عن الخطوط قبل القفزة.'],['تسارع الزمن','تتسارع العقارب ويظهر عقرب ثالث.','اسلك مسارًا واسعًا ولا تنحصر بين العقارب.'],['عكس الزمن','تحذّر حلقة شحن من دفعة رصاص بفتحة آمنة، ثم تنعكس حركة العقارب.','اعبر الفتحة ثم غيّر اتجاه دورانك مع العقارب.']],
+ j:[['اندفاع الحديد','مسار تحذيري يسبق اندفاعًا واحدًا، والاصطدام يطلق موجة صدم بفتحة.','ابتعد عن المسار واعبر فتحة الموجة.'],['اندفاع مزدوج','اندفاع ثانٍ بتحذير جديد يتبع الأول.','واصل الحركة بعد الاصطدام الأول؛ الهجوم لم ينتهِ.'],['صدمة ثلاثية','دوسة بتحذير تتبعها ثلاثة اندفاعات موجّهة تفصلها وقفات.','اعبر الفتحة الخضراء ثم تفادَ كل تصويب جديد.']],
+ v:[['بئر الجاذبية','تسحبك النواة نحوها وسط أقمار دوّارة وألغام وانفجارات مشحونة.','ابتعد عن مدار الأقمار وغادر دوائر الألغام مبكرًا.'],['انفجار مزدوج','ستة أقمار وانفجاران متعاقبان بزوايا مختلفة.','اترك مساحة للانفجار الثاني وتحرّك عرضيًا أمام الجاذبية.'],['انهيار المدار','تطلق بوابات محدّدة نحو الداخل بعد تحذير مدته 1.35 ثانية، مع قطاع آمن.','ابتعد عن مسارات البوابات واتجه إلى القطاع غير المحدّد.']],
+ x:[['وابل الحلقات','يتناوب بين حلقات ودفعات موجّهة ولولب بتحذير واستدعاء أبراج.','اعبر الفجوات واحتفظ بمسار بعيد عن نيران الأبراج.'],['تسارع اللولب','ثلاثة أذرع لولبية ودفعات أسرع ومتكرّرة.','تحرّك بثبات عبر الفجوات وتجنّب الانعطافات الحادّة.'],['نيران المنشور','اثنتا عشرة طلقة تصنع أربع مراوح بتحذير وتترك مسارًا واضحًا.','راقب الأشعة المتقطّعة وابقَ بين المراوح.']],
+ q:[['مطر حمضي','أسراب شظايا وستائر رصاص عمودية مع مسارين آمنين محدّدين.','ادخل المسار الأخضر قبل إطلاق الستارة.'],['ستارة مزدوجة','أسراب أكبر تتبعها ستارة ثانية بمسارات آمنة جديدة.','راقب المسارات التالية ولا تبقَ في المسار الأول.'],['ممر السرب','رصاص من الجانبين يسبقه تحديد ممر أفقي آمن.','ادخل الممر الأخضر وانتبه للشظايا المتبقية.']],
+ C:[['صواعق وكرات برق','تُحدّد أعمدة الصواعق أثناء الشحن وتتبعها دفعة ثانية. في الأطوار التالية تطلق المعينات شررًا جانبيًا. كرات البرق تثبّت تصويبها ثم تتجه إلى موقعك السابق.','راقب المسارات والمعينات وتفادَ كل كرة بعد تثبيت تصويبها.'],['أشعة العاصفة والرياح','ثمانية أشعة تتبعها دفعة ثانية بين مسارات الأولى. تدفعك الرياح جانبًا ويتكرّر الرعد في مرور ثانٍ.','ابتعد عن الزعيم وبعد كل دفعة انتقل إلى مسار شعاع انتهى.'],['عاصفة متسلسلة','يتوقّع الزعيم اتجاهك وتلاحقك صواعق متسلسلة تتخلّلها أعمدة ورياح.','لا تجرِ في خط مستقيم؛ غيّر اتجاهك عند ظهور علامة.']],
+ E:[['جدران الهلال وعبور القمر','جدران هلالية تجتاح الساحة بفجوات خضراء. قمر داكن يثبّت مسارك ثم يندفع في شريط محدّد.','اعبر فجوة كل جدار واخرج من الشريط المحدّد.'],['سقوط الشمس والهالة','مذنّبات تسقط في مسارات قطرية محدّدة وتترك مسارًا مفتوحًا، مع حلقات رصاص داكنة تتغيّر فتحتها.','ابحث عن المسار المفتوح وانتقل إلى كل فتحة جديدة.'],['الكسوف الكلّي','تظلم الساحة وتجتاحها جدران وضربات قمرية، تنتهي بجدارين يلتقيان عند فتحة مشتركة.','راقب كل فجوة وفي الهجوم الأخير قف داخل الفتحة المشتركة.']]
+};
+const guideArabic={
+ c:['صيّاد شائك يلاحقك باستمرار. تنبض نواته الكريستالية أثناء المطاردة.','تحرّك في أقواس واسعة؛ انعطافه بطيء ويسهل الدوران حوله.'],
+ b:['بلّورة دوّارة ترتدّ عن الجدران في خطوط مستقيمة ولا تصوّب نحوك.','اقرأ اتجاهها مبكرًا واعبر الفجوات.'],
+ d:['يقترب ببطء ثم يثبّت خط تصويب متقطّعًا ويندفع بسرعة.','انتظر وميض الخط ثم تحرّك جانبًا؛ لا يستطيع الانعطاف أثناء الاندفاع.'],
+ m:['يستقر ويتسلّح ثم تنفجر دائرة الخطر وتطلق ثماني رصاصات.','غادر الدائرة المتقطّعة قبل وميض النواة ثم راقب الرصاص.'],
+ s:['يحافظ على المسافة ويطلق رصاصًا بطيئًا نحوك مباشرة.','تحرّك جانبًا باستمرار لتفادي الطلقات.'],
+ T:['طلقاته تتعقّبك بانعطاف خفيف، ثم تستقيم بعد بضع ثوانٍ.','دع الطلقة تقترب ثم انعطف بحدّة؛ لا يمكنها مجاراة انعطافك.'],
+ p:['كرة ثقيلة تزحف نحوك ثم تنفجر إلى ثلاث شظايا سريعة عند اقترابك أو انتهاء الفتيل.','ابتعد قبل الانفجار وتفادَ الشظايا بانعطاف حادّ.'],
+ f:['شظايا صغيرة وسريعة تختفي بعد ثوانٍ قليلة.','لا تجرِ مستقيمًا؛ انعطف بحدّة لتتجاوزك.'],
+ h:['يطاردك ثم يتلاشى ويظهر قربك بعد حلقة تحذير قصيرة.','راقب الحلقة وابتعد قبل اكتمال ظهوره.'],
+ g:['دوّامة ثابتة تسحبك نحو النواة. لمس النواة يضرّك.','تحرّك عرضيًا أمام السحب واستعن بتعزيز السرعة.'],
+ l:['يتمركز على الحافة ويثبّت خط تصويب ثم يطلق شعاعًا عبر الساحة.','غادر الخط فور وميضه؛ الشعاع يدوم لحظة قصيرة.'],
+ w:['يطير ويترك بذورًا تتسلّح ثم تنفجر كل منها إلى أربع طلقات.','ابتعد عن أثره وعن البذور قبل انفجارها.'],
+ i:['يعكس موقعك دون ضرر ثم يومض بالأحمر ويندفع نحوك.','اهرب عند الوميض الأحمر؛ الاندفاع يدوم نحو ثانية.'],
+ N:['يعكس موقعك ثم يقلّد شكل وقدرة عدو بلون رمادي لمدة خمس ثوانٍ. إن لم يجد ما يقلّده يندفع نحوك.','لون الوميض يكشف الهجوم القادم. الحلقة المتقطّعة تميّز النسخة المقلّدة.'],
+ t:['يتحوّل ثلاث مرات إلى ثقب أسود لخمس ثوانٍ؛ يزداد السحب والحجم. لمس النواة يكلّف قلبًا ثم يختفي الثقب.','ابتعد قبل التمدّد واستغل فترات الهدوء لتغيير موقعك.'],
+ z:['شائك متطوّر؛ تومض نواته الكريستالية كل ست ثوانٍ ثم يندفع بسرعة أعلى لفترة قصيرة.','غيّر اتجاهك عند وميض الكريستال وحافظ على المسافة.'],
+ u:['بلّورة أكبر وأسرع ترتدّ عن الجدران وتشحن نواتها لتسقط شوكة تبقى خمس ثوانٍ.','راقب الأرض وخطّط لمسار بين الأشواك.'],
+ a:['يثبّت التصويب ويعدّ ثلاث إشارات ثم يطلق أربعة أشعة متقاطعة.','قف بين ذراعين من التقاطع، لا على الخطوط.'],
+ e:['سهم متطوّر ينفّذ اندفاعين ويعيد التصويب سريعًا بعد الأول.','تفادَ الاندفاعين ولا تتوقف بعد الأول.'],
+ M:['لغم زاحف يتسلّح عندما تدخل حلقة الاستشعار، ثم يومض وينفجر إلى ثماني طلقات.','ابقَ خارج الحلقة وابتعد عن دائرة الخطر عند الوميض.'],
+ H:['شبح متوّج ينتقل قربك. كل اختفاء ثالث يطلق خمسة أشباح صغيرة بخطوط مستقيمة عبر الساحة.','راقب توهّج التاج واعبر بين الأشباح مع الانتباه لحلقة الظهور.'],
+ Q:['يدور لاختيار خط عشوائي ثم يعبر الساحة بسرعة ويزرع قنابل تنفجر معًا إلى أربع طلقات لكل قنبلة.','ابتعد عن الخط المتقطّع ثم غادر مواقع القنابل فور مروره.'],
+ P:['يطلق شظيتين تتعقّبانك وأربع شظايا من حواف الساحة نحو موقع الانفجار.','اخرج من خطوط التحذير وتحرّك قطريًا بعيدًا عن المطاردتين.']
+};
+const translatedStrings={};
+for(const id of BOSSES){const ar=arabicLessons[id];bossLessons[id].forEach((lesson,i)=>lesson.forEach((text,j)=>translatedStrings[text]=ar[i][j]));translatedStrings[BOSS_FINAL[id]]=ar[2][0];const entry=GUIDE.find(g=>g.id===id);translatedStrings[entry.desc]='اصمد 40 ثانية. الطور الأول: من 40 إلى 20 ثانية. الثاني: من 20 إلى 12 ثانية. الثالث: آخر 12 ثانية. '+ar.map((p,i)=>'الطور '+(i+1)+': '+p[1]).join(' ');translatedStrings[entry.tip]=ar[2][2];}
+for(const [id,ar] of Object.entries(guideArabic)){const e=GUIDE.find(g=>g.id===id);if(e){translatedStrings[e.desc]=ar[0];translatedStrings[e.tip]=ar[1];}}
+for(let n=1;n<=STAGE_MAX;n++){const bk=n%5===0?bossFor(n):null;let ar='المرحلة '+n+' تدوم '+stageDur(n)+' ثانية.';if(bk)ar+=' الزعيم: '+({k:'كرونوس',j:'المدرّع',v:'المتفرّدة',x:'الحارس',q:'الخلية',C:'العاصفة',E:'الكسوف'}[bk.k])+(bk.tier>0?' (أقوى، الجولة '+(bk.tier+1)+')':'')+'. يظهر الزعيم وحده مع تعزيزات إضافية.';if(INTRO[n])ar+=' يظهر عدو جديد في هذه المرحلة.';else if(n>43)ar+=' يمكن أن يظهر أي نوع من الأعداء.';else if(n>1&&!bk)ar+=' يمكن أن تظهر أعداء المراحل السابقة.';translatedStrings[stageInfoText(n)]=ar;}
+RTC_I18N.add(translatedStrings);
+
 /* ---------- Settings (sound + graphics) · cosmetic only, gameplay untouched ---------- */
 (function(){
 const KEY='rtc_settings_v1';
-const PR={high:{res:2,glow:1,fx:1,parts:100,fps:60,menuAnim:1},medium:{res:1.5,glow:0,fx:1,parts:60,fps:60,menuAnim:1},low:{res:1,glow:0,fx:0,parts:25,fps:30,menuAnim:0}};
+const PR={high:{res:2,glow:1,fx:1,parts:100,menuAnim:1},medium:{res:1.5,glow:0,fx:1,parts:60,menuAnim:1},low:{res:1,glow:0,fx:0,parts:25,menuAnim:0}};
 function presetFor(q){if(q==='auto')q=((navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=3)?'medium':'high';const p=Object.assign({},PR[q]||PR.high);if(lmReducedMotion())p.menuAnim=0;return p;}
 let saved=null;try{saved=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){}
-SET=Object.assign({music:100,sfx:100,quality:'auto',shake:1,vib:1},presetFor('auto'),saved&&typeof saved==='object'?saved:{});
-if(!['auto','high','medium','low','custom'].includes(SET.quality))SET.quality='auto';
-if(SET.quality==='auto')Object.assign(SET,presetFor('auto'));
+const defaultQuality=((navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=3)?'medium':'high';
+SET=Object.assign({music:100,sfx:100,quality:defaultQuality,fps:60,shake:1,vib:1},saved&&typeof saved==='object'?saved:{});
+if(!['high','medium','low'].includes(SET.quality))SET.quality=defaultQuality;
+Object.assign(SET,presetFor(SET.quality));
+SET.fps=+SET.fps===30?30:60;
 SET.music=Math.max(0,Math.min(100,+SET.music||0));SET.sfx=Math.max(0,Math.min(100,+SET.sfx||0));
 function save(){try{localStorage.setItem(KEY,JSON.stringify(SET));}catch(e){}}
 /* glow/shadow switch on the main canvas (shadowBlur is the heaviest op on weak phones) */
@@ -4755,24 +4848,23 @@ function apply(){
  if(menuMotion!==!!+SET.menuAnim)$('menuMotion').click();
  applyAudio();resize();
 }
-fxButton.addEventListener('click',()=>{SET.fx=richFX?1:0;SET.quality='custom';save();});
+fxButton.addEventListener('click',()=>{SET.quality=richFX?'high':'low';Object.assign(SET,presetFor(SET.quality));save();apply();});
 $('menuMotion').addEventListener('click',()=>{SET.menuAnim=menuMotion?1:0;save();});
 const seg=(k,o)=>'<div class="sg" data-k="'+k+'">'+o.map(x=>'<button type="button" data-v="'+x[1]+'">'+x[0]+'</button>').join('')+'</div>';
 const onoff=k=>seg(k,[['On','1'],['Off','0']]);
-const sp=document.createElement('section');sp.id='rtcSettings';sp.setAttribute('role','dialog');sp.setAttribute('aria-modal','true');sp.setAttribute('aria-hidden','true');
-sp.innerHTML='<div class="stBox"><h2>⚙ Settings</h2>'
+const sp=document.createElement('section');sp.id='rtcSettings';sp.setAttribute('role','dialog');sp.setAttribute('aria-modal','true');sp.setAttribute('aria-hidden','true');sp.setAttribute('aria-labelledby','stTitle');
+sp.innerHTML='<div class="stBox"><div class="stHead"><div><h2 id="stTitle">⚙ Settings</h2><p class="stSubtitle">Make the game feel yours</p></div><button id="stX" class="stX" type="button" aria-label="Close settings">&times;</button></div>'
++'<div class="stSec">LANGUAGE</div><div class="stRow">Language'+seg('language',[['English','en'],['العربية','ar']])+'</div>'
 +'<div class="stSec">SOUND</div>'
 +'<div class="stRow">Sound'+seg('snd',[['On','1'],['Off','0']])+'</div>'
 +'<label>Music <b id="stMusicV"></b><input id="stMusic" type="range" min="0" max="100" step="5"></label>'
 +'<label>Sound effects <b id="stSfxV"></b><input id="stSfx" type="range" min="0" max="100" step="5"></label>'
-+'<div class="stSec">GRAPHICS · weak phone? choose Low</div>'
-+'<div class="stRow">Quality preset'+seg('quality',[['Auto','auto'],['High','high'],['Medium','medium'],['Low','low']])+'</div>'
-+'<div class="stRow">Resolution'+seg('res',[['Full','2'],['Medium','1.5'],['Low','1'],['Minimum','0.75']])+'</div>'
-+'<div class="stRow">Glow &amp; shadows'+onoff('glow')+'</div>'
-+'<div class="stRow">Visual effects'+seg('fx',[['Full','1'],['Light','0']])+'</div>'
-+'<label>Particles <b id="stPartsV"></b><input id="stParts" type="range" min="10" max="100" step="5"></label>'
-+'<div class="stRow">Frame rate'+seg('fps',[['60 FPS','60'],['30 FPS · smoother on weak phones','30']])+'</div>'
-+'<div class="stRow">Menu animation'+onoff('menuAnim')+'</div>'
++'<div class="stSec">GRAPHICS</div>'
++'<div class="stRow">Graphics quality'+seg('quality',[['High','high'],['Medium','medium'],['Low','low']])+'</div>'
++'<p class="stHint" id="stQualityHint"></p>'
++'<div class="stSec">FPS</div>'
++'<div class="stRow">Frame rate'+seg('fps',[['60 FPS','60'],['30 FPS','30']])+'</div>'
++'<p class="stHint">60 FPS for fluid motion · 30 FPS to save power.</p>'
 +'<div class="stSec">OTHER</div>'
 +'<div class="stRow">Screen shake'+onoff('shake')+'</div>'
 +'<div class="stRow">Vibration'+onoff('vib')+'</div>'
@@ -4782,23 +4874,26 @@ sp.innerHTML='<div class="stBox"><h2>⚙ Settings</h2>'
 document.body.appendChild(sp);
 const isOpen=()=>sp.style.display==='flex';
 function paint(){
- sp.querySelectorAll('.sg').forEach(g=>{const k=g.dataset.k,cur=k==='snd'?(muted?0:1):k==='motion'?lmMotionChoice:SET[k];g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',String(cur)===b.dataset.v));});
+ sp.querySelectorAll('.sg').forEach(g=>{const k=g.dataset.k,cur=k==='language'?RTC_I18N.language:k==='snd'?(muted?0:1):k==='motion'?lmMotionChoice:SET[k];g.querySelectorAll('button').forEach(b=>{const selected=String(cur)===b.dataset.v;b.classList.toggle('on',selected);b.setAttribute('aria-pressed',String(selected));});});
  $('stMusic').value=SET.music;$('stMusicV').textContent=SET.music+'%';$('stSfx').value=SET.sfx;$('stSfxV').textContent=SET.sfx+'%';
- $('stParts').value=SET.parts;$('stPartsV').textContent=SET.parts+'%';
+ $('stQualityHint').textContent={high:'Full detail, glow and rich effects.',medium:'Balanced detail and performance.',low:'Lighter effects for better performance.'}[SET.quality];
 }
-function open(){if(mode==='play')$('pauseBtn').click();SET.fx=richFX?1:0;SET.menuAnim=menuMotion?1:0;sp.style.display='flex';sp.setAttribute('aria-hidden','false');paint();$('stClose').focus({preventScroll:true});}
-function close(){sp.style.display='none';sp.setAttribute('aria-hidden','true');}
+let returnFocus=null;
+function open(){returnFocus=document.activeElement;if(mode==='play')$('pauseBtn').click();SET.fx=richFX?1:0;SET.menuAnim=menuMotion?1:0;sp.style.display='flex';sp.setAttribute('aria-hidden','false');paint();$('stX').focus({preventScroll:true});}
+function close(){sp.style.display='none';sp.setAttribute('aria-hidden','true');if(returnFocus&&returnFocus.isConnected)returnFocus.focus({preventScroll:true});}
 sp.addEventListener('click',e=>{
  const b=e.target.closest('.sg button');if(!b)return;
  const k=b.parentNode.dataset.k,v=b.dataset.v;
+ if(k==='language'){RTC_I18N.set(v);paint();return;}
  if(k==='snd'){ensureAudio();if(muted===(v==='1'))toggleMute();paint();return;}
  if(k==='motion'){lmMotionChoice=v;try{localStorage.setItem('rtc_motion_v1',v);}catch(e){}menuDirty=true;lmMotionLabel();paint();return;}
  if(k==='quality'){SET.quality=v;Object.assign(SET,presetFor(v));}
- else{SET[k]=+v;SET.quality='custom';}
+ else{SET[k]=+v;}
  save();apply();paint();
 });
-for(const [id,k] of [['stMusic','music'],['stSfx','sfx'],['stParts','parts']])$(id).addEventListener('input',e=>{SET[k]=+e.target.value;if(k==='parts')SET.quality='custom';save();apply();paint();});
+for(const [id,k] of [['stMusic','music'],['stSfx','sfx']])$(id).addEventListener('input',e=>{SET[k]=+e.target.value;save();apply();paint();});
 $('stClose').addEventListener('click',close);
+$('stX').addEventListener('click',close);
 $('setBtn').addEventListener('click',()=>{try{ensureAudio();}catch(e){}open();});
 $('pSet').addEventListener('click',open);
 document.addEventListener('keydown',e=>{if(!isOpen())return;if(e.key==='Escape'){e.preventDefault();close();}e.stopPropagation();},true);
