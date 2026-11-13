@@ -1,79 +1,75 @@
-/* Race the Clock — offline + auto-update service worker.
-   Game page is cached once (27 MB), then opens instantly and works offline.
-   On each launch it does a tiny HEAD request; if the host reports a new
-   ETag/Last-Modified for index.html it silently downloads the new version
-   (used the NEXT time the game opens). No manual version bump needed. */
-const SHELL_CACHE = 'rtc-shell-v8';
-const FONT_CACHE  = 'rtc-fonts-v1';
-const META_CACHE  = 'rtc-meta-v1';
-const SMALL = ['./polish.css','./polish.js','./language.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
-const SIG_KEY = './__sig';
-
-const sigOf = r => (r.headers.get('etag') || '') + '|' + (r.headers.get('last-modified') || '');
-async function saveSig(s){ const c = await caches.open(META_CACHE); await c.put(SIG_KEY, new Response(s)); }
-async function loadSig(){ const c = await caches.open(META_CACHE); const r = await c.match(SIG_KEY); return r ? r.text() : ''; }
+/* Race the Clock — coherent offline shell.
+   Bump SHELL_VERSION whenever bundled HTML, scripts, styles or icons change.
+   A complete new shell installs before activation; existing tabs keep their
+   current worker until closed. Do not replace individual shell files in place. */
+const CACHE_PREFIX = 'rtc:' + encodeURIComponent(self.registration.scope) + ':';
+const SHELL_VERSION = 'v10';
+const SHELL_CACHE = CACHE_PREFIX + 'shell-' + SHELL_VERSION;
+const FONT_CACHE = CACHE_PREFIX + 'fonts-v1';
+const CONFIG_CACHE = CACHE_PREFIX + 'config-v1';
+const SHELL = ['./index.html','./polish.css','./polish.js','./language.js','./studio-ui.js','./studio-ui.css','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(SHELL_CACHE);
-    const res = await fetch('./index.html', {cache: 'reload'});
-    if (!res.ok) throw new Error('index.html fetch failed');
-    await c.put('./index.html', res);
-    await c.addAll(SMALL);
-    try { const h = await fetch('./index.html', { method: 'HEAD', cache: 'no-store' }); if (h.ok) await saveSig(sigOf(h)); } catch (_) {}
-    await self.skipWaiting();
+    // addAll commits the complete bundle or rejects installation on failure.
+    await c.addAll(SHELL.map(path => new Request(new URL(path, self.registration.scope), {cache: 'reload'})));
   })());
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
-    const keep = [SHELL_CACHE, FONT_CACHE, META_CACHE];
-    for (const k of await caches.keys()) if (!keep.includes(k)) await caches.delete(k);
-    await self.clients.claim();
+    const keep = [SHELL_CACHE, FONT_CACHE, CONFIG_CACHE];
+    for (const key of await caches.keys()) {
+      if (key.startsWith(CACHE_PREFIX) && !keep.includes(key)) await caches.delete(key);
+    }
+    // Legacy unscoped caches may belong to another installation: preserve them.
   })());
 });
 
-let lastCheck = 0;
-async function checkForUpdate(){
-  if (Date.now() - lastCheck < 60000) return;
-  lastCheck = Date.now();
-  try {
-    const h = await fetch('./index.html', { method: 'HEAD', cache: 'no-store' });
-    if (!h.ok) return;
-    const s = sigOf(h);
-    if (s === '|' || s === await loadSig()) return;      // no validators, or unchanged
-    const res = await fetch('./index.html', { cache: 'no-store' });
-    if (!res.ok) return;
-    await (await caches.open(SHELL_CACHE)).put('./index.html', res);
-    await saveSig(s);
-  } catch (_) { /* offline: ignore */ }
+async function shellResponse(req, navigation = false){
+  const c = await caches.open(SHELL_CACHE);
+  return (await c.match(navigation ? new URL('./index.html', self.registration.scope).href : req)) || fetch(req);
 }
 
-async function fontsSWR(req){
-  const c = await caches.open(FONT_CACHE);
-  const hit = await c.match(req);
-  const net = fetch(req).then(r => { if (r && (r.ok || r.type === 'opaque')) c.put(req, r.clone()); return r; }).catch(() => hit);
-  return hit || net;
+async function configResponse(req){
+  const c = await caches.open(CONFIG_CACHE);
+  try {
+    const response = await fetch(req);
+    if (response.ok) await c.put(req, response.clone());
+    return response;
+  } catch (err) {
+    const cached = await c.match(req);
+    if (cached) return cached;
+    throw err;
+  }
 }
 
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  if (req.mode === 'navigate') {
-    e.respondWith(caches.match('./index.html').then(r => r || fetch(req)));
-    e.waitUntil(checkForUpdate());
+  if (req.mode === 'navigate' && url.origin === location.origin) {
+    e.respondWith(shellResponse(req, true));
     return;
   }
   if (url.origin === location.origin && url.pathname.endsWith('/lb-config.js')) {
-    e.respondWith(fetch(req).then(r => { if (r.ok) { const c = r.clone(); caches.open(SHELL_CACHE).then(x => x.put(req, c)); } return r; }).catch(() => caches.match(req)));
+    e.respondWith(configResponse(req));
     return;
   }
   if (url.origin === location.origin) {
-    e.respondWith(caches.match(req).then(r => r || fetch(req)));
+    e.respondWith(shellResponse(req));
     return;
   }
   if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    e.respondWith(fontsSWR(req));
+    const cache = caches.open(FONT_CACHE);
+    const hit = cache.then(c => c.match(req));
+    const refresh = cache.then(async c => {
+      const response = await fetch(req);
+      if (response.ok || response.type === 'opaque') await c.put(req, response.clone());
+      return response;
+    });
+    e.waitUntil(refresh.then(() => {}, () => {}));
+    e.respondWith(hit.then(cached => cached || refresh));
   }
 });
