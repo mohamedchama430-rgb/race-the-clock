@@ -7,8 +7,13 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 #menu .modeCard.selected{background:linear-gradient(135deg,#69502d88,#3f362977);border-color:var(--rtc-gold);box-shadow:inset 3px 0 var(--rtc-gold)}
 #menu .modeDesc{color:var(--rtc-muted);line-height:1.65}
 #menu .panelLabel{color:#b6c7df}
-#menu .stat{border:1px solid #34435b;border-radius:12px;background:#0b1425}
-#menu .stat b{font-variant-numeric:tabular-nums;color:#fff0c4}
+#menu .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;border:0;background:none;padding:0;margin:0 0 16px;border-radius:0}
+#menu .stat{border:1px solid #3a4b64;border-radius:12px;background:#101b2c;padding:14px 10px;min-height:76px;gap:7px;letter-spacing:.09em;color:#b2c2d7;box-shadow:inset 0 1px #ffffff09}
+#menu .stat+.stat{border-inline-start:1px solid #3a4b64}
+#menu .stat b{font-variant-numeric:tabular-nums;color:#fff0c4;font-size:28px;line-height:1}
+#menu #missionsBtn,#menu #skinsBtn{min-height:44px;padding:10px 12px;font-size:13px}
+#menu #missionWallet{font-size:12px;font-weight:700;color:#ffdc83;letter-spacing:.02em}
+@media(max-width:480px),(max-height:740px){#menu .stats{gap:9px;margin-bottom:12px}#menu .stat{min-height:64px;padding:10px 8px}#menu .stat b{font-size:25px}#menu .arcadePanel{padding:16px}#menu .modeDesc{margin-block:9px 12px;min-height:0}#menu .modeCard{min-height:62px}#menu .btns{gap:8px}}
 #menu .btn.alt{min-height:46px;font-size:13px;background:#1a2a41;border-color:#3d5270;color:#e1eaf6}
 #menu .btn.alt:hover{background:#253b56;border-color:#8cdfe1}
 #menu .arcadeBrand{color:#bbcbd8}
@@ -52,3 +57,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .guideEmpty{color:#cad7e7;text-align:center;padding:24px}
 @media(max-width:480px){#guide{padding:14px 12px 24px}#guide .gHead{top:-14px}#gGrid{grid-template-columns:repeat(2,minmax(0,1fr))}#rtcSettings .stCard{padding:12px}#rtcSettings .stBox{padding-inline:14px}#rtcSettings .stHead{margin-inline:-14px;padding-inline:14px}}
 @media(prefers-reduced-motion:reduce){button,input{transition:none!important}}
+/* Short menus spend space on controls, retaining full-size touch targets. */
+@media(max-height:740px){#menu .arcadeBrand,#menu .tag,#menu .panelLabel{display:none}#menu .logo{margin-bottom:8px}#menu .logo:before{font-size:16px;margin-bottom:1px}#menu .logo h1{font-size:46px}#menu .logo:after{display:none}#menu .arcadePanel{padding:12px 14px}#menu .modeCard{min-height:46px;padding:5px 6px}#menu .modeDesc{font-size:10px;line-height:1.4;margin:6px 0 9px}#menu .stats{margin-bottom:10px}#menu .stat{min-height:56px;padding:8px;gap:5px}#menu .stat b{font-size:24px}#menu .btn.alt,#menu #missionsBtn,#menu #skinsBtn{min-height:44px;padding:8px;font-size:12px}#menu #go{min-height:48px;padding:10px;font-size:17px;margin-bottom:3px}#menu .btns{gap:8px}}
+@media(max-height:480px) and (min-width:560px){#menu .menuContent{width:calc(100% - 32px);max-width:800px}#menu .logo{display:none}#menu .arcadePanel{width:100%;display:grid;grid-template-columns:minmax(180px,.8fr) minmax(280px,1.3fr);gap:8px 16px;padding:12px 16px}#menu .modeSelect{grid-column:1;grid-row:1}#menu .modeDesc{grid-column:1;grid-row:2;margin:0}#menu .stats{grid-column:1;grid-row:3;margin:0}#menu .btns{grid-column:2;grid-row:1/5;align-content:center}#menu #lbWho{grid-column:1;grid-row:4;margin:0!important}#menu .btn.alt{font-size:11px}#menu .modeCard b{font-size:11px}#menu .modeCard small{font-size:6px}#menu .modeIcon{font-size:19px}}
+@media(max-height:480px) and (min-width:560px){#menu .modeCard small{display:none}#menu .modeCard{gap:4px;padding-inline:4px}#menu .modeIcon{font-size:17px}}
