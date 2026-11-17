@@ -3,11 +3,11 @@
    A complete new shell installs before activation; existing tabs keep their
    current worker until closed. Do not replace individual shell files in place. */
 const CACHE_PREFIX = 'rtc:' + encodeURIComponent(self.registration.scope) + ':';
-const SHELL_VERSION = 'v12';
+const SHELL_VERSION = 'v13';
 const SHELL_CACHE = CACHE_PREFIX + 'shell-' + SHELL_VERSION;
 const FONT_CACHE = CACHE_PREFIX + 'fonts-v1';
 const CONFIG_CACHE = CACHE_PREFIX + 'config-v1';
-const SHELL = ['./index.html','./polish.css','./polish.js','./language.js','./studio-ui.js','./studio-ui.css','./missions.js','./progression-ui.js','./progression-ui.css','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
+const SHELL = ['./index.html','./polish.css','./polish.js','./language.js','./studio-ui.js','./studio-ui.css','./missions.js','./progression-ui.js','./progression-ui.css','./premium-art.js','./premium-ui.js','./premium-ui.css','./assets/menu-background.png','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-512.png','./apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil((async () => {

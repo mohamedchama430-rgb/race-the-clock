@@ -4,6 +4,7 @@ const dictionary=Object.create(null), originals=new WeakMap(), attrs=new WeakMap
 let language='en';try{language=localStorage.getItem('rtc_language_v1')==='ar'?'ar':'en';}catch(_){}
 function add(entries){for(const [en,ar] of Object.entries(entries)){dictionary[en]=ar;dictionary[en.toUpperCase()]=ar;}}
 add({
+ 'Effects intensity':'قوة المؤثرات',
  '⚙ Settings':'⚙ الإعدادات','Settings':'الإعدادات','Make the game feel yours':'خصّص اللعبة على ذوقك','Close settings':'إغلاق الإعدادات',
  'LANGUAGE':'اللغة','Language':'اللغة','SOUND':'الصوت','Sound':'الصوت','Music':'الموسيقى','Sound effects':'المؤثرات الصوتية','On':'تشغيل','Off':'إيقاف',
  'GRAPHICS':'الرسوميات','Graphics quality':'جودة الرسوميات','High':'عالية','Medium':'متوسطة','Low':'منخفضة','FPS':'معدل الإطارات','Frame rate':'معدل الإطارات',
